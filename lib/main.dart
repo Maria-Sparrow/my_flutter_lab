@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,9 +14,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Startup Name Generator',
       theme: ThemeData(
-        // Add the 3 lines from here...
-        primaryColor: Colors.cyanAccent,
-      ),
+          // Add the 3 lines from here...
+          primaryColor: Colors.cyanAccent,
+          textTheme: TextTheme(bodyText2: TextStyle(color: Colors.purple))),
       home: RandomWords(),
     );
   }
@@ -42,7 +43,7 @@ class _RandomWordsState extends State<RandomWords> {
               return ListTile(
                 title: Text(
                   pair.asPascalCase,
-                  style: _biggerFont,
+                  // style: _biggerFont,
                 ),
               );
             },
@@ -56,6 +57,17 @@ class _RandomWordsState extends State<RandomWords> {
               title: Text('Saved Suggestions'),
             ),
             body: ListView(children: divided),
+            floatingActionButton: FloatingActionButton(
+              child: const Icon(Icons.star),
+              onPressed: () {
+                Fluttertoast.showToast(
+                  msg: "Here are your favorite words",
+                  gravity: ToastGravity.BOTTOM_LEFT,
+                  textColor: Colors.yellow,
+                  fontSize: 40.0,
+                );
+              },
+            ),
           );
         },
       ), // ...to here.
